@@ -35,7 +35,10 @@ void showBoard(char board[3][3]){
 int main() {
    char board[3][3]= { {'_','_','_'},{'_','_','_'},{'_','_','_'} };
    char player1='X', player2='O';
-
-
+   bool computerTurn= true;
+   int x=0;
+   cin>>x;
+    gameTurn(x ,board, computerTurn);
+    showBoard(board);
 return 0;
 }
