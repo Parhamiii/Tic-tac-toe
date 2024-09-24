@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "E:/FOLDER/am/XO Game/cmake-build-debug",
-		"source" : "E:/FOLDER/am/XO Game"
+		"build" : "E:/FOLDER/am/Tic-tac-toe/cmake-build-debug",
+		"source" : "E:/FOLDER/am/Tic-tac-toe"
 	},
 	"version" : 
 	{

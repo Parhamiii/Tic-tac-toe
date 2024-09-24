@@ -1,4 +1,4 @@
-# Install script for directory: E:/FOLDER/am/XO Game
+# Install script for directory: E:/FOLDER/am/Tic-tac-toe
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "E:/FOLDER/am/XO Game/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "E:/FOLDER/am/Tic-tac-toe/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
