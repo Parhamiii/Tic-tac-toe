@@ -1,8 +1,8 @@
 #include <iostream>
-#include <windows.h>
 #include <stdlib.h>
 #include <ctime>
 using namespace std;
+bool winPlayer1=false;
 void gameTurn(int x, char board[3][3], bool computerTurn){
     switch (x) {
         case 1 : board[0][0]=  computerTurn ? 'O' : 'X';
@@ -74,21 +74,129 @@ int computerChoice(char board[3][3]){
     return x;
 }
 
+void matchResult(char board[3][3]){
+    for(int i=0; i<3; i++){
+        for(int j=0; j<3; j++){
+            // horizontal states:
+            if (i==0 & j==0){
+                if (board[i][j]=='X' && board[i][j+1]=='X' && board[i][j+2]=='X')
+                {
+                    winPlayer1= true;
+                    cout<<"You Win:))))))"<<endl;
+                     break;
+                }
+                else if (board[i][j]=='O' && board[i][j+1]=='O' && board[i][j+2]=='O')
+                    {
+                        cout<<"You Lost"<<endl;
+                        break;
+                    }
+            }
+            else if (i==1 && j==0){
+                if (board[i][j]=='X' && board[i][j+1]=='X' && board[i][j+2]=='X')
+                {
+                    winPlayer1= true;
+                    cout<<"You Win:))))))"<<endl;
+                    break;
+                }
+                else if (board[i][j]=='O' && board[i][j+1]=='O' && board[i][j+2]=='O')
+                {
+                    cout<<"You Lost"<<endl;
+                    break;
+                }
+            }
+            else if (i==2 && j==0){
+                if (board[i][j]=='X' && board[i][j+1]=='X' && board[i][j+2]=='X')
+                {
+                    winPlayer1= true;
+                    cout<<"You Win:))))))"<<endl;
+                    break;
+                }
+                else if (board[i][j]=='O' && board[i][j+1]=='O' && board[i][j+2]=='O')
+                {
+                    cout<<"You Lost"<<endl;
+                    break;
+                }
+            }
+            // vertical states:
+            else if (i==0 && j==0){
+                if (board[i][j]=='X' && board[i+1][j]=='X' && board[i+2][j]=='X'){
+                    winPlayer1= true;
+                    cout<<"You Win:))))))"<<endl;
+                    break;
+                }
+                else if (board[i][j]=='O' && board[i+1][j]=='O' && board[i+2][j]=='O'){
+                    cout<<"You Lost"<<endl;
+                    break;
+                }
+
+            }
+            else if (i==0 && j==1){
+                if (board[i][j]=='X' && board[i+1][j]=='X' && board[i+2][j]=='X'){
+                    winPlayer1= true;
+                    cout<<"You Win:))))))"<<endl;
+                    break;
+                }
+                else if (board[i][j]=='O' && board[i+1][j]=='O' && board[i+2][j]=='O'){
+                    cout<<"You Lost"<<endl;
+                    break;
+                }
+            }
+            else if (i==0 && j==2){
+                if (board[i][j]=='X' && board[i+1][j]=='X' && board[i+2][j]=='X'){
+                    winPlayer1= true;
+                    cout<<"You Win:))))))"<<endl;
+                    break;
+                }
+                else if (board[i][j]=='O' && board[i+1][j]=='O' && board[i+2][j]=='O'){
+                    cout<<"You Lost"<<endl;
+                    break;
+                }
+            }
+            //   .....:
+            else if (i==0){
+                 if (board[i][0]=='X' && board[i+1][1]=='X' && board[i+2][2]=='X') {
+                     winPlayer1= true;
+                     cout<<"You Win:))))))"<<endl;
+                     break;
+                   }
+                 else if (board[i][0]=='O' && board[i+1][1]=='O' && board[i+2][2]=='O') {
+                     cout<<"You Lost"<<endl;
+                     break;
+                 }
+            }
+            else if (j==2){
+                if (board[0][j]=='X' && board[1][j-1]=='X' && board[2][j-2]=='X') {
+                    winPlayer1= true;
+                    cout<<"You Win:))))))"<<endl;
+                    break;
+                }
+                else if (board[i][0]=='O' && board[i+1][1]=='O' && board[i+2][2]=='O') {
+                    cout<<"You Lost"<<endl;
+                    break;
+                }
+            }
+        }
+    }
+
+}
 void play(char board[3][3]){
     int counter=0;
-    while (counter!=4){
+    while (!winPlayer1){              //TODO
         int x=0;
         cin>>x;
         gameTurn(x, board, false);
         x=computerChoice(board);
         gameTurn(x, board, true);
-        counter++;
+//        counter++;
         showBoard(board);
+        matchResult(board);
     }
+    if (!winPlayer1)
+        cout<<"You loose:("<<endl;
 }
 int main() {
    char board[3][3]= { {'_','_','_'},{'_','_','_'},{'_','_','_'} };
-
     play(board);
+  //  matchResult(board);
 return 0;
 }
