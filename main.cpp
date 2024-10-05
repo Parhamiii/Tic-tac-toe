@@ -118,7 +118,7 @@ void matchResult(char board[3][3]) {
         winPlayer1 = true;
         cout << "You Win:))))))" << endl;
     }
-    else if (board[0][1] == 'O' && board[1][0] == 'O' && board[2][1] == 'O') {
+    else if (board[0][0] == 'O' && board[1][0] == 'O' && board[2][0] == 'O') {
         cout << "You Lost" << endl;
         winComputer = true;
     }
@@ -155,20 +155,17 @@ void matchResult(char board[3][3]) {
         cout << "You Lost" << endl;
         winComputer = true;
     }
-    else if (counter>=9 && (!winComputer && !winPlayer1)){
-        equalGame=true;
-        cout<<"Equal..."<<endl;
+    for(int i = 0 ; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            if (board[i][j]!='_' && !winComputer && !winPlayer1 && counter>=9){
+                cout<<"Equal >>>>"<<endl;
+                equalGame= true;
+            }
+        }
     }
-    else if (counter>=9 && winPlayer1){
-        cout<<"You Win :)))))"<<endl;
-    }
-    else if (counter>=9 && winComputer){
-        cout<<"You Lost :((((("<<endl;
-    }
-
 }
 void play(char board[3][3]){
-    while (!winPlayer1 || !winComputer || !equalGame){              //TODO
+    while (!winPlayer1 && !winComputer && !equalGame){              //TODO
         int x=0;
         cin>>x;
         gameTurn(x, board, false);
