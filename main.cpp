@@ -51,14 +51,12 @@ void showBoard(char board[3][3]){
 int computerChoice(char board[3][3]){
     int x=0;
     bool flag= false;
-
+    srand(time(0));
     while (!flag){
         flag = true;
-        srand(time(0));
         x=rand()%9+1;
         for(int i = 0 ; i < 3; i++){
             for(int j = 0; j < 3; j++){
-                //TODO    inja y chizi bayad yadam bashe:
                 switch (x) {
                     case 1 : board[0][0] == '_' ? flag = true : flag = false;
                         break;
@@ -78,6 +76,8 @@ int computerChoice(char board[3][3]){
                         break;
                     case 9 : board[2][2] == '_' ? flag = true : flag = false;
                         break;
+                    default:
+                        cout<<"Number is not in the range"<<endl;
                 }
                 if (!flag)
                     break;
@@ -88,9 +88,52 @@ int computerChoice(char board[3][3]){
     }
     return x;
 }
+int playerChoice(char board[3][3]){
+    int x=0;
+    bool flag= false;
+
+    while (!flag){
+        flag = true;
+        cin>>x;
+        for(int i = 0 ; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                switch (x) {
+                    case 1 : board[0][0] == '_' ? flag = true : flag = false;
+                        break;
+                    case 2 : board[0][1] == '_' ? flag = true : flag = false;
+                        break;
+                    case 3 : board[0][2] == '_' ? flag = true : flag = false;
+                        break;
+                    case 4 : board[1][0] == '_' ? flag = true : flag = false;
+                        break;
+                    case 5 : board[1][1] == '_' ? flag = true : flag = false;
+                        break;
+                    case 6 : board[1][2] == '_' ? flag = true : flag = false;
+                        break;
+                    case 7 : board[2][0] == '_' ? flag = true : flag = false;
+                        break;
+                    case 8 : board[2][1] == '_' ? flag = true : flag = false;
+                        break;
+                    case 9 : board[2][2] == '_' ? flag = true : flag = false;
+                        break;
+                    default:
+                        cout<<"Number is not in the range"<<endl;
+                }
+                if (!flag)
+                    break;
+            }
+            if (!flag)
+                break;
+        }
+        if (!flag){
+            cout<<"your Choice is selected before..."<<endl;
+        }
+    }
+    return x;
+}
 void matchResult(char board[3][3]) {
     // horizontal states:
-    if (board[0][0] == 'X' && board[0][1] == 'X' && board[0][2] == 'X') {
+    if ((board[0][0] == 'X') && board[0][1] == 'X' && board[0][2] == 'X') {
         winPlayer1 = true;
         cout << "You Win:))))))" << endl;
     }
@@ -155,30 +198,26 @@ void matchResult(char board[3][3]) {
         cout << "You Lost" << endl;
         winComputer = true;
     }
-    for(int i = 0 ; i < 3; i++){
-        for(int j = 0; j < 3; j++){
-            if (board[i][j]!='_' && !winComputer && !winPlayer1 && counter>=9){
-                cout<<"Equal >>>>"<<endl;
-                equalGame= true;
-            }
-        }
+    if (counter==9 && !winPlayer1 && !winComputer){
+        equalGame = true;
+        cout<<"Equal"<<endl;
     }
 }
 void play(char board[3][3]){
-    while (!winPlayer1 && !winComputer && !equalGame){              //TODO
+    while (!winPlayer1 && !winComputer && !equalGame){
         int x=0;
-        cin>>x;
+        x = playerChoice( board);
         gameTurn(x, board, false);
-        x=computerChoice(board);
+        if (counter<9){
+        x = computerChoice(board);
         gameTurn(x, board, true);
+        }
         showBoard(board);
         matchResult(board);
-        cout<<"counter: "<<counter<<endl;
     }
 }
 int main() {
     char board[3][3]= { {'_','_','_'},{'_','_','_'},{'_','_','_'} };
     play(board);
-
     return 0;
 }
